@@ -23,6 +23,10 @@ do
         asm="$2"
         shift # past argument
         ;;
+        -p|--predict)
+        gpd="$2"
+        shift # past argument
+        ;;
         *)
             # unknown option
         ;;
@@ -36,10 +40,10 @@ if [ ! $fas ]; then
 	echo '#'
 	echo '# usage:'
     echo 'for genome|assembly|contig'
-	echo '$ bash this_script.sh -f genome.fsa -a y'
+	echo '$ bash this_script.sh -f genome.fsa -a y -p prokka'
     echo ''
     echo 'for short reads'
-	echo '$ bash this_script.sh -f reads.fsa -a n'
+	echo '$ bash this_script.sh -f reads.fsa -a n -p prokka'
 	echo '#'
 	echo '#######################################'
 	echo ''
@@ -56,7 +60,7 @@ mkdir -p $temp
 ########################
 # assembly with IDBA_ud
 ########################
-if [ $asm == "Y" ] || [ $asm == "y" ] 
+if [[ $asm == "Y" ]] || [[ $asm == "y" ]]
 then
     echo "assembly mode"
     idba_ud -l $fas -o $temp/assembly --pre_correction > $temp/asm.log
@@ -73,17 +77,28 @@ fasta=$temp/input.fsa
 
 #exit 1
 
-#################################
-# gene prediction by Metagenemark
-#################################
+############################################
+# gene prediction by Metagenemark or prokka
+############################################
 echo '##########################################################################'
-echo 'step 1: Metagenemark to predict gene...'
+echo 'step 1: Gene prediction'
 echo '##########################################################################'
 echo ''
 
-gmhmmp=/home/xiaoh/Downloads/genome/evaluator/quast-3.1/libs/genemark/linux_64/gmhmmp 
-$gmhmmp -A $fasta\_gmk_aa.fsa -p 0 -f G -m $SCRIPTPATH/../config/MetaGenemark/MetaGeneMark_v1.mod $fasta
 
+if [[ $gpd == "gmk" ]] || [[ $gpd == "genemark" ]]; then
+
+    gmhmmp=/home/xiaoh/Downloads/genome/evaluator/quast-3.1/libs/genemark/linux_64/gmhmmp 
+    $gmhmmp -A $fasta\_gmk_aa.fsa -p 0 -f G -m $SCRIPTPATH/../config/MetaGenemark/MetaGeneMark_v1.mod $fasta
+
+elif [[ $gpd == "prokka" ]] || [[ $gpd == "pka" ]]; then
+
+    /usr/bin/perl /home/xiaoh/Downloads/compiler/intel/intelpython27/bin/prokka --quiet --fast --prefix prokka_out --metagenome --force --outdir $fasta\_prokka $fasta
+    $python $SCRIPTPATH/../lib/pka2gmk.py $fasta $fasta\_prokka/prokka_out.faa $fasta\_prokka/prokka_out.gff > $fasta\_gmk_aa.fsa
+
+else
+    exit 1
+fi
 
 
 #########################################

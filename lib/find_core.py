@@ -105,7 +105,8 @@ for i in f:
 
 
 # build the graph
-locus = G.nodes()
+#locus = G.nodes()
+locus = list(G.nodes())
 
 def sort_fuc(qid):
     #print 'debug', qid
@@ -137,8 +138,10 @@ def find_share(acogs, bcogs, G_cog):
     for acog in acogs:
         for bcog in bcogs:
             if G_cog.has_edge(acog, bcog):
-                fuc = G_cog.edge[acog][bcog].get('fuc', 'unknown')
-                name = G_cog.edge[acog][bcog].get('name', 'unknown')
+                #fuc = G_cog.edge[acog][bcog].get('fuc', 'unknown')
+                fuc = G_cog[acog][bcog].get('fuc', 'unknown')
+                #name = G_cog.edge[acog][bcog].get('name', 'unknown')
+                name = G_cog[acog][bcog].get('name', 'unknown')
                 share = fuc + '::' + name
                 return acog, bcog, name, share
     return None, None, 'unknown', 'unknown::unknown'
@@ -315,7 +318,8 @@ def get_comp(G_AB, init = 3):
 
 # filter node with too many neigbors
 #print 'G_AB is', G_AB, G_AB.degree()
-outdeg = G_AB.degree()
+#outdeg = G_AB.degree()
+outdeg = dict(G_AB.degree())
 x = outdeg.values()
 max_dg = np.mean(x) + np.std(x) * 2
 G_AB_sub = G_AB.subgraph([elem for elem in outdeg if outdeg[elem] <= max_dg])
@@ -362,14 +366,22 @@ for i in get_comp(G_AB_sub, threshold):
     if len(i) < 2:
         continue
     best_op, SP, SN, best_path = findbest(i, operons, paths)
+
     #print 'predict', i, 'real_operon', best_op, 'SP', SP, 'SN', SN
-    predict_annot = '$$'.join(sorted(set([cog_name_dict.get(elem, 'unknown') for elem in i])))
-    real_annot = '$$'.join(sorted(set(sum([[cog_name_dict.get(elem2, 'unknown') for elem2 in elem] for elem in best_op], []))))
+    #predict_annot = '$$'.join(sorted(set([cog_name_dict.get(elem, 'unknown') for elem in i])))
+    predict_annot = '$$'.join([cog_name_dict.get(elem, 'unknown') for elem in i])
+
+    #real_annot = '$$'.join(sorted(set(sum([[cog_name_dict.get(elem2, 'unknown') for elem2 in elem] for elem in best_op], []))))
+    real_annot = '$$'.join(sum([[cog_name_dict.get(elem2, 'unknown') for elem2 in elem] for elem in best_op], []))
+
 
     #best_op = '$$'.join([';;'.join(elem) for elem in best_op])
     best_ops = [';;'.join(elem) for elem in best_op]
     best_ops = [elem and elem or '*' for elem in best_ops]
     best_op = '$$'.join(best_ops)
+
+    if SN < .2 or SP < .2:
+        best_path = best_op = 'not found'
 
     F1 =  SP * SN > 0 and 2. * SP * SN / (SP + SN) or 0
     output = '%s\t%s\t%s\t%f\t%f\t%f'%('$$'.join(i), best_path, best_op, SP, SN, F1)
