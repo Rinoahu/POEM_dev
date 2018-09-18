@@ -13,7 +13,7 @@ Make sure that you have the following installed
 2.  Diamond (version >= 0.8.18)
 3.  MetaGeneMark:
 
-    make sure to add path of gmhmmp to $PATH environment variable
+        make sure to add path of gmhmmp to $PATH environment variable
 
 4.  CD-hit
 5.  IDBA-UD
