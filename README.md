@@ -80,17 +80,28 @@ POEM will create a directory named read.fasta_output to save the results. The re
         Filtered blastp output of step 5. The hits with identity < 80% are removed
 
     7.  input.fsa.cog:
-        COG annotations for the protein sequences of step 4. The first row of this tab-delimited file is the gene number. The rest of the file contains 3 columns: col 1 is the gene identifier, col 2 is the COG identifier and col 3 is the annotation of the genes, for example:
+        COG annotations for the protein sequences of step 4. The first row of this tab-delimited file is the gene number. The rest of the file contains 3 columns: col 1 is the gene identifier, col 2 is the COG identifier and col 3 is the functional category of the genes, for example:
 
             uniq gene 3679
-            gene    cog     annot
-            CPIBHFJP_04443|Prodigal:2.6|3106475_aa|-|4659209|4659544$$gi|985000614|gb|CP014225.1|$$>Cluster_3671$$* COG1455 G::Phosphotransferase system cellobiose-specific component IIC::Carbohydrate transport and metabolism
-            CPIBHFJP_04442|Prodigal:2.6|3106198_aa|-|4658880|4659158$$gi|985000614|gb|CP014225.1|$$>Cluster_3846$$* COG1455 G::Phosphotransferase system cellobiose-specific component IIC::Carbohydrate transport and metabolism
-            CPIBHFJP_04441|Prodigal:2.6|3105940_aa|-|4658384|4658734$$gi|985000614|gb|CP014225.1|$$Orphan$$Orphan   COG1447 G::Phosphotransferase system cellobiose-specific component IIA::Carbohydrate transport and metabolism
+            gene	cog	annot
+            CPIBHFJP_04443|Prodigal:2.6|3106475_aa|-|4659209|4659544$$gi|985000614|gb|CP014225.1|$$>Cluster_3671$$*	COG1455	:G::Phosphotransferase system cellobiose-specific component IIC::Carbohydrate transport and metabolism
+            CPIBHFJP_04442|Prodigal:2.6|3106198_aa|-|4658880|4659158$$gi|985000614|gb|CP014225.1|$$>Cluster_3846$$*	COG1455	G::Phosphotransferase system cellobiose-specific component IIC::Carbohydrate transport and metabolism
+            CPIBHFJP_04441|Prodigal:2.6|3105940_aa|-|4658384|4658734$$gi|985000614|gb|CP014225.1|$$Orphan$$Orphan	COG1447	G::Phosphotransferase system cellobiose-specific component IIA::Carbohydrate transport and metabolism
+            ...
 
 
     8.  input.fsa.locus:
-        The file records the gene's locus on genome
+        The file records the gene's locus on genome. This file contains 5 columns: col 1 is gene identifier, col2 is the chromosome|scaffold name, col3 is the strand of the gene, col 4 and 5 are the start and end of the gene. For example:
+
+		CPIBHFJP_00001|Prodigal:2.6|772_aa|+|255|857$$gi|985000614|gb|CP014225.1|       gi|985000614|gb|CP014225.1|     +       255     857
+		CPIBHFJP_00002|Prodigal:2.6|1014_aa|+|883|1308$$gi|985000614|gb|CP014225.1|     gi|985000614|gb|CP014225.1|     +       883     1308
+		CPIBHFJP_00003|Prodigal:2.6|1165_aa|+|1586|1693$$gi|985000614|gb|CP014225.1|    gi|985000614|gb|CP014225.1|     +       1586    1693
+		CPIBHFJP_00004|Prodigal:2.6|1557_aa|-|1653|2108$$gi|985000614|gb|CP014225.1|    gi|985000614|gb|CP014225.1|     -       1653    2108
+		CPIBHFJP_00005|Prodigal:2.6|1776_aa|-|2179|2502$$gi|985000614|gb|CP014225.1|    gi|985000614|gb|CP014225.1|     -       2179    2502
+		CPIBHFJP_00006|Prodigal:2.6|2485_aa|+|3220|3558$$gi|985000614|gb|CP014225.1|    gi|985000614|gb|CP014225.1|     +       3220    3558
+		CPIBHFJP_00007|Prodigal:2.6|2673_aa|+|3821|3946$$gi|985000614|gb|CP014225.1|    gi|985000614|gb|CP014225.1|     +       3821    3946
+		...
+
 
     9.  input.fsa.adjacency and input.fsa.operon:
         Predicted operonic adjacency and full operon of step 8
