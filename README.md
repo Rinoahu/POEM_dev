@@ -152,8 +152,8 @@ POEM will create a directory named read.fasta_output to save the results. The re
         Network, node attribute and edge attribute extracted from step 11 for cytoscape visualization. Figure 1 shows an example to view the core operons by cytoscape.
 
 
-![OrthoFinder workflow](https://github.com/Rinoahu/POEM_dev/example/cyto.jpeg)
-*Figure 1: Automatic OrthoFinder analysis*
+![Visualization of core operons](example/cyto.jpeg)
+*Figure 1: visualization of core operons in cytoscape*
 
 
 
