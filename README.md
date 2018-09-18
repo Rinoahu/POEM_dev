@@ -15,7 +15,7 @@ Make sure that you have the following installed
 
         make sure to add path of gmhmmp to $PATH environment variable
 
-4.  [CD-hit](http://weizhongli-lab.org/cd-hit/ "http://weizhongli-lab.org/cd-hit/")
+4.  [CD-HIT](http://weizhongli-lab.org/cd-hit/ "http://weizhongli-lab.org/cd-hit/")
 5.  [IDBA-UD](https://github.com/loneknightpy/idba, "https://github.com/loneknightpy/idba")
 
 
@@ -80,7 +80,14 @@ POEM will create a directory named read.fasta_output to save the results. The re
         Filtered blastp output of step 5. The hits with identity < 80% are removed
 
     7.  input.fsa.cog:
-        COG annotation for protein sequence of step 4
+        COG annotations for the protein sequences of step 4. The first row of this tab-delimited file is the gene number. The rest of the file contains 3 columns: col 1 is the gene identifier, col 2 is the COG identifier and col 3 is the annotation of the genes, for example:
+
+            uniq gene 3679
+            gene    cog     annot
+            CPIBHFJP_04443|Prodigal:2.6|3106475_aa|-|4659209|4659544$$gi|985000614|gb|CP014225.1|$$>Cluster_3671$$* COG1455 G::Phosphotransferase system cellobiose-specific component IIC::Carbohydrate transport and metabolism
+            CPIBHFJP_04442|Prodigal:2.6|3106198_aa|-|4658880|4659158$$gi|985000614|gb|CP014225.1|$$>Cluster_3846$$* COG1455 G::Phosphotransferase system cellobiose-specific component IIC::Carbohydrate transport and metabolism
+            CPIBHFJP_04441|Prodigal:2.6|3105940_aa|-|4658384|4658734$$gi|985000614|gb|CP014225.1|$$Orphan$$Orphan   COG1447 G::Phosphotransferase system cellobiose-specific component IIA::Carbohydrate transport and metabolism
+
 
     8.  input.fsa.locus:
         The file records the gene's locus on genome
