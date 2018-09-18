@@ -2,6 +2,7 @@ POEM is a pipeline which can predict operons and core operons from metagenomic g
 
 ## Requirement
 ==============
+
 Make sure that you have the following installed
 
 1.  Python2.7 (Recommend Anaconda) and Packages:
@@ -9,10 +10,11 @@ Make sure that you have the following installed
     2. Biopython (version >=1.68)
     3. Numpy (version >= 1.11.2)
     4. Keras (version >= 2.2.2)
-    5. Theano (version >= 1.0.1)
 2.  Diamond (version >= 0.8.18)
-3.  MetaGeneMark
-        make sure to add path of gmhmmp to $PATH environment variable
+3.  MetaGeneMark:
+
+    make sure to add path of gmhmmp to $PATH environment variable
+
 4.  CD-hit
 5.  IDBA-UD
 
