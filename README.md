@@ -148,8 +148,11 @@ POEM will create a directory named read.fasta_output to save the results. The re
 			COG1662 COG3677 10      9       8       11      0.727272727273
 
 
-    13. input.fsa.core_network.sif, input.fsa.core_node.attrs and input.fsa.core_edge.attrs:
-        Network, node attribute and edge attribute extracted from step 11 for cytoscape visualization
+    13. input.fsa.core_network.sif, input.fsa.core_node.tab and input.fsa.core_edge.attrs:
+        Network, node attribute and edge attribute extracted from step 11 for cytoscape visualization. Figure show an example to view the core operons by cytoscape.
+		![OrthoFinder workflow](POEM_dev/example/cyto.jpeg)
+*Figure 1: Automatic OrthoFinder analysis*
+
 
 
 
