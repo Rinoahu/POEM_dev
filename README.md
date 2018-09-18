@@ -11,7 +11,7 @@ Make sure that you have the following installed
     3. Numpy (version >= 1.11.2)
     4. Keras (version >= 2.2.2)
 2.  Diamond (version >= 0.8.18)
-3.  MetaGeneMark(http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/"):
+3.  [MetaGeneMark](http://exon.gatech.edu/GeneMark/ "http://exon.gatech.edu/GeneMark/"):
 
         make sure to add path of gmhmmp to $PATH environment variable
 
