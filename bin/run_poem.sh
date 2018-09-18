@@ -5,8 +5,10 @@ SCRIPT=`realpath -s $0`
 SCRIPTPATH=`dirname $SCRIPT`
 
 # set the path for the python
-lpython=/home/xiaoh/Downloads/compiler/intel/intelpython27/bin/python
-python=pypy
+#lpython=/home/xiaoh/Downloads/compiler/intel/intelpython27/bin/python
+#python=pypy
+lpython=python
+python=python
 
 #######################################
 # parse the args
@@ -149,7 +151,10 @@ echo '##########################################################################
 echo ''
 # convert the gene predict to the format the operon predictor need.
 $python $SCRIPTPATH/../lib/to_list.py $fasta\_aa.fsa > $fasta\.locus
+
+echo "$lpython $SCRIPTPATH/../lib/deep_operon.py predict $fasta $fasta\.locus $SCRIPTPATH/../config/Operon_Predictor/model.hdf5 > $fasta\.adjacency"
 $lpython $SCRIPTPATH/../lib/deep_operon.py predict $fasta $fasta\.locus $SCRIPTPATH/../config/Operon_Predictor/model.hdf5 > $fasta\.adjacency
+
 $lpython $SCRIPTPATH/../lib/adj2operon.py $fasta\.adjacency $fasta\.cog > $fasta\.operon
 
 

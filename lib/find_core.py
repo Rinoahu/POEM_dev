@@ -6,7 +6,7 @@ import networkx as nx
 from Bio import SeqIO
 from collections import Counter
 import cPickle as pickle
-from sklearn import cluster
+#from sklearn import cluster
 import numpy as np
 
 

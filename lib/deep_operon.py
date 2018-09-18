@@ -15,14 +15,18 @@ import pickle
 
 # from sklearn import cross_validation, metrics  # Additional scklearn
 # functions
-from sklearn import metrics  # Additional scklearn functions
+#from sklearn import metrics  # Additional scklearn functions
 # from sklearn.grid_search import GridSearchCV  # Perforing grid search
-from sklearn.svm import LinearSVC as SVC
+#from sklearn.svm import LinearSVC as SVC
 
 import os
 
 # set backend
-os.environ['KERAS_BACKEND'] = 'tensorflow'
+os.environ['KERAS_BACKEND'] = 'theano'
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   # see issue #152
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
+
+
 
 from keras import backend as K
 # K.set_image_data_format('channels_first')
@@ -1169,7 +1173,8 @@ if __name__ == '__main__':
     from keras.models import Sequential
     from keras.preprocessing import sequence
     from keras.layers import Dense, Dropout, Activation, Flatten, Embedding, BatchNormalization
-    from keras.layers import Input, Merge, LSTM, GRU, Bidirectional, UpSampling2D, InputLayer, CuDNNGRU
+    #from keras.layers import Input, Merge, LSTM, GRU, Bidirectional, UpSampling2D, InputLayer, CuDNNGRU
+    from keras.layers import Input, LSTM, GRU, Bidirectional, UpSampling2D, InputLayer
     from keras.optimizers import SGD, Adam, RMSprop
     from keras.layers.convolutional import Convolution2D, MaxPooling2D, ZeroPadding2D, Conv2D
     from keras.utils import np_utils
